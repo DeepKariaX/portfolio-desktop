@@ -1,0 +1,244 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "deepkaria-light";
+  color-scheme: "light";
+  --color-base-100: #ebebeb;
+  --color-base-200: #eeeeee;
+  --color-base-300: #dadada;
+  --color-base-content: oklch(20% 0 0);
+  --color-primary: oklch(0% 0 0);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(0% 0 0);
+  --color-secondary-content: oklch(100% 0 0);
+  --color-accent: #0a82ff;
+  --color-accent-content: oklch(100% 0 0);
+  --color-neutral: oklch(0% 0 0);
+  --color-neutral-content: oklch(100% 0 0);
+
+  --color-info: oklch(70% 0.165 254.624);
+  --color-info-content: oklch(28% 0.091 267.935);
+  --color-success: #28c840;
+  --color-success-content: #296117;
+  --color-warning: #febc2e;
+  --color-warning-content: #8f591d;
+  --color-error: #ff5f57;
+  --color-error-content: #8c1a11;
+  --radius-selector: 5px;
+  --radius-field: 5px;
+  --radius-box: 10px;
+  --size-selector: 3px;
+  --size-field: 2.2px;
+  --border: 0.5px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "deepkaria-dark";
+  color-scheme: "dark";
+  --color-base-100: #262627;
+  --color-base-200: #373737;
+  --color-base-300: #3f3f3f;
+  --color-base-content: oklch(100% 0 0);
+  --color-primary: oklch(100% 0 0);
+  --color-primary-content: oklch(0% 0 0);
+  --color-secondary: oklch(100% 0 0);
+  --color-secondary-content: oklch(0% 0 0);
+  --color-accent: #0a82ff;
+  --color-accent-content: oklch(100% 0 0);
+  --color-neutral: oklch(100% 0 0);
+  --color-neutral-content: oklch(0% 0 0);
+
+  --color-info: oklch(70% 0.165 254.624);
+  --color-info-content: oklch(28% 0.091 267.935);
+  --color-success: #28c840;
+  --color-success-content: #296117;
+  --color-warning: #febc2e;
+  --color-warning-content: #8f591d;
+  --color-error: #ff5f57;
+  --color-error-content: #8c1a11;
+  --radius-selector: 5px;
+  --radius-field: 5px;
+  --radius-box: 10px;
+  --size-selector: 3px;
+  --size-field: 2.2px;
+  --border: 0.5px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@custom-variant dark (&:where([data-theme="deepkaria-dark"], [data-theme="deepkaria-dark"] *));
+
+@custom-variant window-active (&:where([data-window-active] *));
+
+@custom-variant menu-bar-active (&:where([data-menu-bar-active] *));
+
+@theme {
+  --text-sm: 13px;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-base-content/10;
+  }
+
+  * {
+    @apply touch-manipulation;
+  }
+
+  html,
+  body {
+    @apply h-full;
+    overscroll-behavior: none;
+  }
+
+  body {
+    @apply bg-black text-sm;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+  }
+
+  ::selection {
+    @apply text-accent-content bg-accent;
+  }
+
+  kbd {
+    @apply highlight bg-base-200/80 mx-0 inline-flex min-w-6 items-center justify-center rounded-sm px-1.5 text-sm;
+  }
+
+  a {
+    @apply outline-base-content outline-offset-2 focus-visible:outline-2;
+  }
+
+  .dragging [data-window] * {
+    touch-action: none;
+  }
+
+  [data-window] {
+    @apply text-base-content/85;
+  }
+}
+
+@utility focus-ring {
+  @apply focus-visible:outline-base-content focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+@utility dragging {
+  @apply select-none;
+}
+
+@utility text-shadow {
+  text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.3);
+}
+
+@utility standard-border {
+  @apply relative outline not-dark:outline-black/10 sm:outline-[0.5px] dark:outline-black/90;
+
+  &:not(.bg-window)::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 z-[100] rounded-[inherit] outline -outline-offset-1 outline-white/15;
+  }
+}
+
+@utility bg-glass {
+  @apply standard-border bg-base-200/50 relative backdrop-blur-[15px] transition-colors;
+}
+
+@utility bg-window {
+  @apply standard-border dark:bg-base-100/50 not-[[data-window-active]]:bg-base-100 bg-base-100/65 relative backdrop-blur-[40px] backdrop-saturate-150;
+
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 z-[90] rounded-[inherit] outline -outline-offset-1 outline-white/20;
+  }
+}
+
+@utility bg-dock {
+  @apply relative bg-[#f6f6f6]/39 outline-black/50 backdrop-blur-[15px] dark:bg-[#4A4A4A]/39 dark:outline sm:dark:outline-[0.5px];
+
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-[inherit] outline -outline-offset-1 outline-white/15;
+  }
+}
+
+@utility bg-control {
+  @apply rounded-box bg-base-200/30 flex flex-col border-[0.5px] border-white/20 shadow-md outline-[0.5px] outline-black/20;
+}
+
+@utility preview {
+  @apply rounded-box border-base-content/20 bg-base-100/20 absolute border-2;
+}
+
+@utility highlight {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+@utility btn {
+  @apply bg-base-content/15 rounded-field text-base-content/80 h-[22px] translate-none border-none px-[7px] py-[3px] text-[13px] font-normal duration-0;
+
+  &:not(.btn-ghost) {
+    @apply highlight;
+  }
+
+  &:active {
+    @apply bg-base-content/25;
+  }
+
+  &:active:not(.btn-active) {
+    @apply translate-none;
+  }
+}
+
+@utility btn-accent {
+  @apply window-active:bg-accent window-active:text-accent-content;
+
+  &:active {
+    @apply bg-accent/90;
+  }
+}
+
+@utility btn-lg {
+  @apply h-7 px-[5px] text-lg;
+}
+
+@utility btn-ghost {
+  @apply hover:bg-base-content/5 active:bg-base-content/15 text-base-content/60 active:text-base-content bg-transparent;
+}
+
+@utility select {
+  @apply border-none bg-transparent px-2.5 text-sm;
+
+  &:hover {
+    @apply highlight bg-base-content/25;
+  }
+}
+
+@utility window-content {
+  @apply window-active:bg-white window-active:dark:bg-[#1e1e1e] h-full w-full overflow-auto;
+}
+
+@utility input {
+  @apply bg-base-100/50;
+}
