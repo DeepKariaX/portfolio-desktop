@@ -1,2 +1,2 @@
 [build]
-  command = "npm install && npm run build" 
+  command = "bash ./netlify-build.sh" 
